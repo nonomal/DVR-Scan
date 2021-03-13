@@ -11,6 +11,8 @@ DVR-Scan Changelog
 
 #### Changelog
 
+ * [general] Project license moved from BSD 2-Clause to BSD 3-Clause
+
 
 ----------------------------------------------------------
 

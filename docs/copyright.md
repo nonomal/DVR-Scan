@@ -3,7 +3,7 @@
 
 ```md
 
-                DVR-Scan License (BSD 2-Clause)
+                DVR-Scan License (BSD 3-Clause)
           < https://github.com/Breakthrough/DVR-Scan >
 
 Copyright (C) 2016-2021, Brandon Castellano.
@@ -21,6 +21,10 @@ are met:
        disclaimer in the documentation and/or other materials
        provided with the distribution.
 
+    3. Neither the name of the copyright holder nor the names of its
+       contributors may be used to endorse or promote products derived
+       from this software without specific prior written permission.
+
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
 LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
@@ -34,78 +38,44 @@ THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 ```
 
+
 ## Ancillary Software Licenses
 
 This section contains the license agreements for all third-party software libraries used and distributed with DVR-Scan.
 
 
-### NumPy License
+### NumPy
 
  - Copyright (C) 2005-2016, NumPy Developers.
  - URL: <a href="http://www.numpy.org/license.html" alt="NumPy License">http://www.numpy.org/license.html</a>
 
-```md
-Copyright (C) 2005-2016, NumPy Developers.
-All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-
-  * Redistributions of source code must retain the above copyright notice,
-    this list of conditions and the following disclaimer.
-
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
-
-  * Neither the name of the NumPy Developers nor the names of any
-    contributors may be used to endorse or promote products derived from this
-    software without specific prior written permission.
-
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR
-ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
-AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-```
-
-### OpenCV License
+### OpenCV
 
  - Copyright (C) 2017, Itseez.
  - URL: <a href="http://opencv.org/license.html" alt="OpenCV License">http://opencv.org/license.html</a>
 
-```md
-                          License Agreement
-               For Open Source Computer Vision Library
-                       (3-clause BSD License)
 
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
+### click
 
-  * Redistributions of source code must retain the above copyright notice,
-    this list of conditions and the following disclaimer.
+ - Copyright (C) 2017, Armin Ronacher.
+ - URL: <a href="http://click.pocoo.org/license/" alt="click License">http://click.pocoo.org/license/</a>
 
-  * Redistributions in binary form must reproduce the above copyright notice,
-    this list of conditions and the following disclaimer in the documentation
-    and/or other materials provided with the distribution.
 
-  * Neither the names of the copyright holders nor the names of the
-    contributors may be used to endorse or promote products derived from this
-    software without specific prior written permission.
+### tqdm
 
-This software is provided by the copyright holders and contributors "as is" and
-any express or implied warranties, including, but not limited to, the implied
-warranties of merchantability and fitness for a particular purpose are
-disclaimed. In no event shall copyright holders or contributors be liable for
-any direct, indirect, incidental, special, exemplary, or consequential damages
-(including, but not limited to, procurement of substitute goods or services;
-loss of use, data, or profits; or business interruption) however caused
-and on any theory of liability, whether in contract, strict liability,
-or tort (including negligence or otherwise) arising in any way out of
-the use of this software, even if advised of the possibility of such damage.
-```
+ - Copyright (C) 2013-2018, Casper da Costa-Luis, Google Inc., and Noam Yorav-Raphael.
+ - URL: <a href="https://raw.githubusercontent.com/tqdm/tqdm/master/LICENCE" alt="tqdm License">https://raw.githubusercontent.com/tqdm/tqdm/master/LICENCE</a>
+
+
+### FFmpeg
+
+This software may also invoke FFmpeg, if available.
+
+FFmpeg is a trademark of Fabrice Bellard.
+
+Certain distributions of DVR-Scan may include FFmpeg;
+see the included `LICENSE-FFMPEG` file, or visit https://ffmpeg.org/ for details.  In source distributions of DVR-Scan, FFmpeg is not distributed, and requires manual
+installation.
+
+You can obtain FFmpeg from [https://ffmpeg.org/download.html](https://ffmpeg.org/download.html).

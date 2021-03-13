@@ -33,4 +33,4 @@ For users wanting finer control over the output video encoding method, the defau
 ------------------------------------------------
 
 Copyright © 2016-2021 Brandon Castellano. All rights reserved.
-Licensed under BSD 2-Clause (see the LICENSE file for details).
+Licensed under BSD 3-Clause (see the LICENSE file for details).

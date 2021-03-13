@@ -6,7 +6,7 @@ or any other material included in in distribution.
 
 -----------------------------------------------------------------------
 
-                   DVR-Scan License (BSD 2-Clause)
+                   DVR-Scan License (BSD 3-Clause)
              < https://github.com/Breakthrough/DVR-Scan >
 
 Copyright (C) 2016-2021, Brandon Castellano.
@@ -23,6 +23,10 @@ are met:
        copyright notice, this list of conditions and the following
        disclaimer in the documentation and/or other materials
        provided with the distribution.
+
+    3. Neither the name of the copyright holder nor the names of its
+       contributors may be used to endorse or promote products derived
+       from this software without specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
 "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
@@ -54,3 +58,7 @@ installing or using this software/tutorial, you agree to these terms.
     This software uses OpenCV; see the LICENSE-OPENCV file
     or visit [ http://opencv.org/license.html ] for details.
 
+> FFmpeg [Fabrice Bellard]:
+    FFmpeg is a trademark of Fabrice Bellard. Certain distributions
+    of DVR-Scan may include FFmpeg; see the included LICENSE-FFMPEG
+    file, or visit https://ffmpeg.org/ for details.

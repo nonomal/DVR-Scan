@@ -15,5 +15,5 @@ This allows for easier communication regarding development and helps ensure that
 
 All submitted code should follow the [Google Python Style Guide](https://google.github.io/styleguide/pyguide.html) as closely as possible.  Also, ensure that you search through [all existing issues](https://github.com/Breakthrough/DVR-Scan/issues?q=) (both open and closed) beforehand to avoid creating duplicate entries.
 
-Note that DVR-Scan is released under the BSD 2-Clause license, and submitted code must comply with this license (see [License & Copyright Info](copyright.md) for details).
+Note that DVR-Scan is released under the BSD 3-Clause License, and submitted code must comply with this license (see [License & Copyright Info](copyright.md) for details).
 

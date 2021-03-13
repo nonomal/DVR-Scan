@@ -9,7 +9,7 @@
 #
 # Copyright (C) 2016-2021 Brandon Castellano <http://www.bcastell.com>.
 #
-# DVR-Scan is licensed under the BSD 2-Clause License; see the included
+# DVR-Scan is licensed under the BSD 3-Clause License; see the included
 # LICENSE file or visit one of the following pages for details:
 #  - https://github.com/Breakthrough/DVR-Scan/
 #
@@ -58,7 +58,7 @@ DVR-Scan %s
 Copyright (C) 2016-2021 Brandon Castellano
 < https://github.com/Breakthrough/DVR-Scan >
 
-This DVR-Scan is licensed under the BSD 2-Clause license; see the
+This DVR-Scan is licensed under the BSD 3-Clause License; see the
 included LICENSE file, or visit the above link for details. This
 software uses the following third-party components:
   NumPy: Copyright (C) 2005-2013, Numpy Developers.

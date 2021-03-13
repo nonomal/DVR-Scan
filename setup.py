@@ -63,7 +63,7 @@ setup(
     author='Brandon Castellano',
     author_email='brandon248@gmail.com',
     url='https://github.com/Breakthrough/DVR-Scan',
-    license="BSD 2-Clause",
+    license="BSD 3-Clause",
     keywords="video computer-vision analysis",
     install_requires=get_requires(),
     extras_require=get_extra_requires(),

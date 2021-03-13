@@ -15,7 +15,7 @@ For help or other issues, feel free to submit any bugs or feature requests to Gi
 
 ----------------------------------------------------------
 
-Licensed under BSD 2-Clause (see the `LICENSE` file for details).
+Licensed under BSD 3-Clause (see the `LICENSE` file for details).
 
 Copyright (C) 2016-2021 Brandon Castellano.
 All rights reserved.
