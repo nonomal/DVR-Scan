@@ -45,8 +45,7 @@ import numpy as np
 
 # DVR-Scan Library Imports
 from scenedetect import FrameTimecode
-import dvr_scan.platform
-
+import scenedetect.platform
 
 DEFAULT_VIDEOWRITER_CODEC = cv2.VideoWriter_fourcc('X', 'V', 'I', 'D')
 
@@ -333,7 +332,7 @@ class ScanContext(object):
 
     def _create_progress_bar(self, show_progress, num_frames):
         # type: (bool, int) -> tqdm.tqdm
-        tqdm = None if not show_progress else dvr_scan.platform.get_tqdm()
+        tqdm = None if not show_progress else scenedetect.platform.tqdm
         if tqdm is not None:
             if self._end_time and self._end_time.frame_num < num_frames:
                 num_frames = self._end_time.frame_num
@@ -341,7 +340,7 @@ class ScanContext(object):
                 num_frames -= self._start_time.frame_num
             if num_frames < 0:
                 num_frames = 0
-            return tqdm.tqdm(
+            return tqdm(
                 total=num_frames,
                 unit=' frames',
                 desc="[DVR-Scan] Processed")
