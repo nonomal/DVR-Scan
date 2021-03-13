@@ -34,7 +34,7 @@ if sys.version_info < (2, 7) or (3, 0) <= sys.version_info < (3, 3):
 def get_requires():
     # type: () -> List[str]
     """ Get Requires: Returns a list of required packages. """
-    requires = ['numpy', 'tqdm']
+    requires = ['numpy', 'tqdm', 'scenedetect']
     return requires
 
 
@@ -56,7 +56,7 @@ def get_extra_requires():
 
 setup(
     name='dvr-scan',
-    version='1.2.1',
+    version='2.0-dev',
     description="Tool for finding and extracting motion events in video files"
                 "(e.g. security camera footage).",
     long_description=open('package-info.rst').read(),

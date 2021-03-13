@@ -27,11 +27,12 @@ If installing from source, DVR-Scan requires [Python 2 or 3](https://www.python.
 
  - [OpenCV](http://opencv.org/) (requires version 3.0 and above) and the Python module (`cv2` - can find on Pypi as `opencv-python`)
  - [Numpy](http://sourceforge.net/projects/numpy/) Python module (`numpy`)
+ - [PySceneDetect](http://github.com/Breakthrough/PySceneDetect/) Python module (`scenedetect`)
  - [tqdm](https://pypi.python.org/pypi/tqdm), *optional* Python module (`tqdm`) for displaying progress bar and estimated time remaining
+ - [ffmpeg](https://ffmpeg.org/download.html), required to extract the motion events when detected
 
-You can [click here](http://breakthrough.github.io/Installing-OpenCV/) for a quick guide (OpenCV + Numpy on Windows & Linux) on installing the latest versions of OpenCV/Numpy on [Windows (using pre-built binaries)](http://breakthrough.github.io/Installing-OpenCV/#installing-on-windows-pre-built-binaries) and [Linux (compiling from source)](http://breakthrough.github.io/Installing-OpenCV/#installing-on-linux-compiling-from-source).  If the Python module that comes with OpenCV on Windows is incompatible with your system architecture or Python version, [see this page](http://www.lfd.uci.edu/~gohlke/pythonlibs/#opencv) to obtain a pre-compiled (unofficial) module.
+You can [click here](http://breakthrough.github.io/Installing-OpenCV/) for a quick guide (OpenCV + Numpy on Windows & Linux) on installing the latest versions of OpenCV/Numpy on [Windows (using pre-built binaries)](http://breakthrough.github.io/Installing-OpenCV/#installing-on-windows-pre-built-binaries) and [Linux (compiling from source)](http://breakthrough.github.io/Installing-OpenCV/#installing-on-linux-compiling-from-source).
 
-Note that some Linux package managers still provide older, dated builds of OpenCV (pre-3.0); if you want to ensure you have the latest version, it's recommended that you [build and install OpenCV from source](http://breakthrough.github.io/Installing-OpenCV/#installing-on-linux-compiling-from-source) on Linux.
 
 ### Installing DVR-Scan
 
@@ -59,5 +60,5 @@ To get familiar with DVR-Scan, try running `dvr-scan --help`, or see the [Gettin
 
 To update DVR-Scan when newer versions are released, follow the instructions for your installation method again.  You do not need to uninstall or remove any older versions of DVR-Scan when upgrading.
 
-If using the MSI installer, older versions of DVR-Scan will be upgraded automatically.  If using a portable distribution, you can safely overwrite any existing files with the ones included with the new version.  If installing from source, running the installation command will automatially upgrade the existing DVR-Scan installation on the system.
+If using the installer, older versions of DVR-Scan will be upgraded automatically.  If using a portable distribution, you can safely overwrite any existing files with the ones included with the new version.  If installing from source, running the installation command will automatially upgrade the existing DVR-Scan installation on the system.
 
