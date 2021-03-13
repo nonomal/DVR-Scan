@@ -44,7 +44,7 @@ import cv2
 import numpy as np
 
 # DVR-Scan Library Imports
-from dvr_scan.timecode import FrameTimecode
+from scenedetect import FrameTimecode
 import dvr_scan.platform
 
 
