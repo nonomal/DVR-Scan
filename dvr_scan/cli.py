@@ -35,6 +35,9 @@ an argparse-based CLI parser used by the DVR-Scan application.
 from __future__ import print_function
 import argparse
 
+# Third-Party Library Imports
+from scenedetect import FrameTimecode
+
 # DVR-Scan Library Imports
 import dvr_scan
 
@@ -59,39 +62,16 @@ def timecode_type_check(metavar=None):
     """
     metavar = 'value' if metavar is None else metavar
     def _type_checker(value):
-        valid = False
-        value = str(value).lower().strip()
-        # Integer number of frames.
-        if value.isdigit():
-            # All characters in string are digits, just parse as integer.
-            frames = int(value)
-            if frames >= 0:
-                valid = True
-                value = frames
-        # Integer or real/floating-point number of seconds.
-        elif value.endswith('s'):
-            secs = value[:-1]
-            if secs.replace('.', '').isdigit():
-                secs = float(secs)
-                if secs >= 0.0:
-                    valid = True
-                    value = secs
-        # Timecode in HH:MM:SS[.nnn] format.
-        elif ':' in value:
-            tc_val = value.split(':')
-            if (len(tc_val) == 3 and tc_val[0].isdigit() and tc_val[1].isdigit()
-                    and tc_val[2].replace('.', '').isdigit()):
-                hrs, mins = int(tc_val[0]), int(tc_val[1])
-                secs = float(tc_val[2]) if '.' in tc_val[2] else int(tc_val[2])
-                if (hrs >= 0 and mins >= 0 and secs >= 0 and mins < 60
-                        and secs < 60):
-                    valid = True
-                    value = [hrs, mins, secs]
-        msg = ('invalid timecode: %s (timecode must conform to one of the'
-               ' formats the dvr-scan --help message)' % value)
-        if not valid:
-            raise argparse.ArgumentTypeError(msg)
-        return value
+        if value is None:
+            return value
+        timecode = str(value).strip().lower()
+        try:
+            _ = FrameTimecode(timecode=timecode, fps=30.0)
+            return timecode
+        except (ValueError, TypeError):
+            raise argparse.ArgumentTypeError(
+                'invalid timecode: %s\ntimecode must be in frames (1234), seconds (123.4s),'
+                ' or HH:MM:SS (00:02:03.400)' % value)
     return _type_checker
 
 
