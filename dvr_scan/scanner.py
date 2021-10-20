@@ -223,8 +223,7 @@ class ScanContext(object):
 
     def set_video_time(self, start_time=None, end_time=None, duration=None):
         # type: (str, str, str) -> None
-        self._start_time = None
-        self._end_time = None
+        """ Used to select a sub-set of the video in time for processing. """
         assert self._video_fps is not None
         if start_time is not None:
             self._start_time = FrameTimecode(start_time, self._video_fps)
@@ -237,7 +236,6 @@ class ScanContext(object):
                 self._end_time = duration
         elif end_time is not None:
             self._end_time = FrameTimecode(end_time, self._video_fps)
-
 
     def _load_input_videos(self):
         # type: () -> bool
@@ -376,13 +374,13 @@ class ScanContext(object):
         return True
 
 
-    def scan_motion(self):
+    def scan_motion(self, method='mog'):
         # type: () -> None
         """ Performs motion analysis on the ScanContext's input video(s). """
-        self._logger.info("Scanning %s for motion events...",
-            "%d input videos" % len(self._video_paths) if len(self._video_paths) > 1
-            else "input video")
-        bg_subtractor = cv2.createBackgroundSubtractorMOG2(detectShadows=False)
+        if method.lower() == 'cnt':
+            bg_subtractor = cv2.bgsegm.createBackgroundSubtractorCNT()
+        else:
+            bg_subtractor = cv2.createBackgroundSubtractorMOG2(detectShadows=False)
         buffered_frames = []
         event_window = []
         self.event_list = []
@@ -391,10 +389,7 @@ class ScanContext(object):
 
         video_writer = None
         output_prefix = ''
-        if self._comp_file:
-            video_writer = cv2.VideoWriter(self._comp_file, self._fourcc,
-                                           self._video_fps, self._video_resolution)
-        elif len(self._video_paths[0]) > 0:
+        if not self._comp_file and len(self._video_paths[0]) > 0:
             output_prefix = os.path.basename(self._video_paths[0])
             dot_index = output_prefix.rfind('.')
             if dot_index > 0:
@@ -421,6 +416,10 @@ class ScanContext(object):
         # TQDM-based progress bar, or a stub if in quiet mode (or no TQDM).
         progress_bar = self._create_progress_bar(
             show_progress=self._show_progress, num_frames=self._frames_total)
+
+        self._logger.info("Scanning %s for motion events...",
+            "%d input videos" % len(self._video_paths) if len(self._video_paths) > 1
+            else "input video")
 
         # Motion event scanning/detection loop.
         while self.running:
@@ -491,9 +490,10 @@ class ScanContext(object):
                     event_start = FrameTimecode(curr_pos.frame_num, self._video_fps)
                     # Open new VideoWriter if needed, write buffered_frames to file.
                     if not self._scan_only:
-                        if not self._comp_file:
-                            output_path = '%s.DSME_%04d.avi' % (
-                                output_prefix, len(self.event_list))
+                        if not self._comp_file or video_writer is None:
+                            output_path = (
+                                self._comp_file if self._comp_file else
+                                '%s.DSME_%04d.avi' % (output_prefix, len(self.event_list)))
                             video_writer = cv2.VideoWriter(
                                 output_path, self._fourcc, self._video_fps,
                                 self._video_resolution)

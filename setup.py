@@ -43,20 +43,24 @@ def get_extra_requires():
     """ Get Extra Requires: Returns a list of extra/optional packages. """
     return {
         'opencv:python_version <= "3.5"':
-            ['opencv-python<=4.2.0.32'],
+            ['opencv-python<=4.2.0.32', 'opencv-contrib-python<=4.2.0.32'],
         'opencv:python_version > "3.5"':
-            ['opencv-python'],
+            ['opencv-python', 'opencv-contrib-python'],
 
         'opencv-headless:python_version <= "3.5"':
-            ['opencv-python-headless<=4.2.0.32'],
+            ['opencv-python-headless<=4.2.0.32','opencv-contrib-python-headless<=4.2.0.32'],
         'opencv-headless:python_version > "3.5"':
-            ['opencv-python-headless'],
+            ['opencv-python-headless', 'opencv-contrib-python-headless'],
     }
 
 
 setup(
     name='dvr-scan',
+<<<<<<< HEAD
     version='2.0-dev',
+=======
+    version='1.3',
+>>>>>>> master
     description="Tool for finding and extracting motion events in video files"
                 "(e.g. security camera footage).",
     long_description=open('package-info.rst').read(),
