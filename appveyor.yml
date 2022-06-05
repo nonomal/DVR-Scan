@@ -1,0 +1,95 @@
+# We have to disable the `build` command explicitly otherwise the default is
+# MSBuild which assumes this is a Visual Studio project. Python source/binary
+# wheels a Windows .exe are generated below in `install`.
+build: false
+
+environment:
+  matrix:
+    - PYTHON: "C:\\Python39-x64"
+  # Encrypted AdvancedInstaller License
+  ai_license_secret:
+    secure: lulTujjpNX3A1RKIvj834/Czn6etzevma6oqlA5Xia5tgrg75SPXcs1lPNlu5YPU
+  ai_license_salt:
+    secure: kMv/7J3wqaRGUJYwnfaY6edw0VW39uX7oM9Od9PQ2wwlCmTZcwAh4kEUxhB5u91QbXmp4McMuwcXAO4UdVoSGg==
+
+## SignPath Config for Code Signing
+#deploy:
+#- provider: Webhook
+#  url: https://app.signpath.io/API/v1/f2efa44c-5b5c-45f2-b44f-8f9dde708313/Integrations/AppVeyor?ProjectSlug=DVR-Scan&SigningPolicySlug=test-signing
+#  authorization:
+#     secure: mdCtq1nvbA+ADEqG36J9szgR045RLAsBbc58b7rusEnSuUA7rHFE4jMZvtdr6ODZOJqYZX8i/0bTgFPiiG/2rA==
+
+install:
+  - git checkout master
+
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - echo * *                      SETTING UP PYTHON ENVIRONMENT                      * *
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - 'SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%'
+  - python --version
+  - python -m pip install --upgrade pip
+
+  # Install DVR-Scan dependencies and checkout resources required for tests.
+  - python -m pip install -r dist/requirements_windows.txt
+
+  # Checkout all Windows build dependencies and extract them.
+  - git checkout refs/remotes/origin/build-windows -- dist/
+  - 7z e dist/windows_thirdparty.7z
+
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - echo * *                          BUILDING WINDOWS EXE                           * *
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  # Build Windows .EXE and create portable .ZIP
+  - pyinstaller dist/dvr-scan.spec
+  - python dist/cleanup_dependencies.py
+  - cp ffmpeg.exe dist/dvr-scan
+  - cp mkvmerge.exe dist/dvr-scan
+  - cd dist/dvr-scan
+  - 7z a ../dvr-scan-win64.zip *
+  - cd ../..
+
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - echo * *                         BUILDING MSI INSTALLER                          * *
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  # Download, install, and register AdvancedInstaller
+  - cd dist/installer
+  - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+  - appveyor-tools\secure-file -decrypt license65.dat.enc -secret %ai_license_secret% -salt %ai_license_salt%
+  - appveyor DownloadFile https://www.advancedinstaller.com/downloads/advinst.msi
+  - msiexec /i advinst.msi /qn
+  - 'SET PATH=%PATH%;C:\\Program Files (x86)\\Caphyon\\Advanced Installer 19.5\\bin\\x86'
+  # License path must be absolute
+  - AdvancedInstaller.com /RegisterOffline "%cd%\license65.dat"
+  # Create MSI installer
+  - AdvancedInstaller.com /build DVR-Scan.aip
+  - cd ../..
+
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - echo * *                        PACKAGING BUILD ARTIFACTS                        * *
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  # Zip all resources together for code signing
+  - cd dist
+  - move installer\DVR-Scan-*.msi .
+  - cp dvr-scan\dvr-scan.exe .
+  - 7z a dvr-scan-signed.zip dvr-scan.exe DVR-Scan-*.msi
+  - cd ..
+
+test_script:
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  - echo * *                              TESTING BUILD                              * *
+  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  # Run unit tests
+  - pytest
+  # Test Windows build
+  - cd dist/dvr-scan
+  - dvr-scan.exe --version
+  - scenedetect.exe -i ../../tests/resources/testvideo.mp4 -b opencv detect-content time -e 2s
+  - scenedetect.exe -i ../../tests/resources/testvideo.mp4 -b pyav detect-content time -e 2s
+
+artifacts:
+  # Portable ZIP
+  - path: dist/dvr-scan-win64.zip
+    name: DVR-Scan-win64_portable
+  # MSI Installer + .EXE Bundle for Signing
+  - path: dist/dvr-scan-signed.zip
+    name: DVR-Scan-win64_installer
