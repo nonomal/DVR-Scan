@@ -82,9 +82,8 @@ test_script:
   - pytest
   # Test Windows build
   - cd dist/dvr-scan
-  - dvr-scan.exe --version
-  - scenedetect.exe -i ../../tests/resources/testvideo.mp4 -b opencv detect-content time -e 2s
-  - scenedetect.exe -i ../../tests/resources/testvideo.mp4 -b pyav detect-content time -e 2s
+  - dvr-scan.exe -v
+  - dvr-scan.exe -i ../../tests/resources/simple_movement.mp4 -so -df 4 -et 100
 
 artifacts:
   # Portable ZIP
