@@ -36,16 +36,12 @@ install:
 
   # Checkout all Windows build dependencies and extract them.
   - git checkout refs/remotes/origin/build-windows -- dist/
-  - 7z e dist/windows_thirdparty.7z
-
   - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   - echo * *                          BUILDING WINDOWS EXE                           * *
   - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   # Build Windows .EXE and create portable .ZIP
   - pyinstaller dist/dvr-scan.spec
   - python dist/cleanup_dependencies.py
-  - cp ffmpeg.exe dist/dvr-scan
-  - cp mkvmerge.exe dist/dvr-scan
   - cd dist/dvr-scan
   - 7z a ../dvr-scan-win64.zip *
   - cd ../..
