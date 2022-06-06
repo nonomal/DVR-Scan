@@ -28,6 +28,8 @@ install:
   - 'SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%'
   - python --version
   - python -m pip install --upgrade pip
+  # Make sure we get latest binary packages OpenCV.
+  - "python -m pip install opencv-python-headless opencv-contrib-python-headless --only-binary :all:"
 
   # Install DVR-Scan dependencies and checkout resources required for tests.
   - python -m pip install -r dist/requirements_windows.txt
@@ -48,30 +50,34 @@ install:
   - 7z a ../dvr-scan-win64.zip *
   - cd ../..
 
-  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  - echo * *                         BUILDING MSI INSTALLER                          * *
-  - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
-  # Download, install, and register AdvancedInstaller
-  - cd dist/installer
-  - ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
-  - appveyor-tools\secure-file -decrypt license65.dat.enc -secret %ai_license_secret% -salt %ai_license_salt%
-  - appveyor DownloadFile https://www.advancedinstaller.com/downloads/advinst.msi
-  - msiexec /i advinst.msi /qn
-  - 'SET PATH=%PATH%;C:\\Program Files (x86)\\Caphyon\\Advanced Installer 19.5\\bin\\x86'
-  # License path must be absolute
-  - AdvancedInstaller.com /RegisterOffline "%cd%\license65.dat"
-  # Create MSI installer
-  - AdvancedInstaller.com /build DVR-Scan.aip
-  - cd ../..
-
+  # TODO: Add installer.
+  #- echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  #- echo * *                         BUILDING MSI INSTALLER                          * *
+  #- echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
+  ## Download, install, and register AdvancedInstaller
+  #- cd dist/installer
+  #- ps: iex ((New-Object Net.WebClient).DownloadString('https://raw.githubusercontent.com/appveyor/secure-file/master/install.ps1'))
+  #- appveyor-tools\secure-file -decrypt license65.dat.enc -secret %ai_license_secret% -salt %ai_license_salt%
+  #- appveyor DownloadFile https://www.advancedinstaller.com/downloads/advinst.msi
+  #- msiexec /i advinst.msi /qn
+  #- 'SET PATH=%PATH%;C:\\Program Files (x86)\\Caphyon\\Advanced Installer 19.5\\bin\\x86'
+  ## License path must be absolute
+  #- AdvancedInstaller.com /RegisterOffline "%cd%\license65.dat"
+  ## Create MSI installer
+  #- AdvancedInstaller.com /build DVR-Scan.aip
+  #- cd ../..
+  #
   - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   - echo * *                        PACKAGING BUILD ARTIFACTS                        * *
   - echo * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
   # Zip all resources together for code signing
   - cd dist
-  - move installer\DVR-Scan-*.msi .
+  # TODO: Add installer.
+  #- move installer\DVR-Scan-*.msi .
   - cp dvr-scan\dvr-scan.exe .
-  - 7z a dvr-scan-signed.zip dvr-scan.exe DVR-Scan-*.msi
+  # TODO: Add installer.
+  #- 7z a dvr-scan-signed.zip dvr-scan.exe DVR-Scan-*.msi
+  - 7z a dvr-scan-signed.zip dvr-scan.exe
   - cd ..
 
 test_script:
