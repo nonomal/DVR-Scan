@@ -17,7 +17,7 @@ deploy:
 - provider: Webhook
   url: https://app.signpath.io/API/v1/f2efa44c-5b5c-45f2-b44f-8f9dde708313/Integrations/AppVeyor?ProjectSlug=DVR-Scan&SigningPolicySlug=test-signing
   authorization:
-     secure: iH0hlYXQ/gMx3ySxp+1yEHTnXp19xuzjkS6jngI97mzghaqkmprhi5ull5Wh0h+a
+     secure: bqPCfrI5jEpd1/+r6YtxCBwlkczZMfGd7vuqnLztmZQ=
 
 install:
   - git checkout v1.5-beta
@@ -94,7 +94,6 @@ artifacts:
   # MSI Installer + .EXE Bundle for Signing
   #- path: dist/dvr-scan-signed.zip
   #  name: DVR-Scan-win64_installer
-
   # Temporary EXE-only until installer is integrated.
   - path: dist/dvr-scan/dvr-scan.exe
     name: DVR-Scan-win64_exeonly
