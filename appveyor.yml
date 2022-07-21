@@ -28,6 +28,8 @@ install:
   - 'SET PATH=%PYTHON%;%PYTHON%\\Scripts;%PATH%'
   - python --version
   - python -m pip install --upgrade pip
+  # Make sure we get latest binary packages OpenCV.
+  - "python -m pip install opencv-python opencv-contrib-python --only-binary :all:"
 
   # Install DVR-Scan dependencies for Windows builds.
   - python -m pip install -r dist/requirements_windows.txt
